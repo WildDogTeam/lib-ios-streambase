@@ -36,8 +36,9 @@
 		2837E3521BE89C1800DD2A7A /* Inflight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837E3371BE89C1800DD2A7A /* Inflight.swift */; };
 		2837E3531BE89C1800DD2A7A /* NSTimer+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837E3381BE89C1800DD2A7A /* NSTimer+Closure.swift */; };
 		2837E3541BE89C1800DD2A7A /* String+trimPrefix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837E3391BE89C1800DD2A7A /* String+trimPrefix.swift */; };
-		2837E36D1BE8AB7C00DD2A7A /* Wilddog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2837E36C1BE8AB7C00DD2A7A /* Wilddog.framework */; };
 		2837E36F1BE8ABB000DD2A7A /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2837E36E1BE8ABB000DD2A7A /* libsqlite3.tbd */; };
+		2896811E1BEC8D19008140A3 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F516DB1BE751A800D4FA21 /* JavaScriptCore.framework */; };
+		289681221BEC8E63008140A3 /* Wilddog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2896811C1BEC8D0D008140A3 /* Wilddog.framework */; };
 		28F516AC1BE7514D00D4FA21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F516AB1BE7514D00D4FA21 /* AppDelegate.swift */; };
 		28F516AE1BE7514D00D4FA21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F516AD1BE7514D00D4FA21 /* ViewController.swift */; };
 		28F516B11BE7514D00D4FA21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F516AF1BE7514D00D4FA21 /* Main.storyboard */; };
@@ -45,7 +46,6 @@
 		28F516B61BE7514D00D4FA21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28F516B41BE7514D00D4FA21 /* LaunchScreen.storyboard */; };
 		28F516C11BE7514D00D4FA21 /* StreamBaseExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F516C01BE7514D00D4FA21 /* StreamBaseExampleTests.swift */; };
 		28F516CC1BE7514D00D4FA21 /* StreamBaseExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F516CB1BE7514D00D4FA21 /* StreamBaseExampleUITests.swift */; };
-		28F516DC1BE751A800D4FA21 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28F516DB1BE751A800D4FA21 /* JavaScriptCore.framework */; };
 		28F516DE1BE7521500D4FA21 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F516DD1BE7521500D4FA21 /* Environment.swift */; };
 		28F517021BE7546700D4FA21 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F517011BE7546700D4FA21 /* Message.swift */; };
 /* End PBXBuildFile section */
@@ -66,19 +66,6 @@
 			remoteInfo = StreamBaseExample;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		284DEDE31BE7591000EB148C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2837E3051BE89B3400DD2A7A /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
@@ -122,8 +109,8 @@
 		2837E3371BE89C1800DD2A7A /* Inflight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inflight.swift; sourceTree = "<group>"; };
 		2837E3381BE89C1800DD2A7A /* NSTimer+Closure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTimer+Closure.swift"; sourceTree = "<group>"; };
 		2837E3391BE89C1800DD2A7A /* String+trimPrefix.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+trimPrefix.swift"; sourceTree = "<group>"; };
-		2837E36C1BE8AB7C00DD2A7A /* Wilddog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Wilddog.framework; sourceTree = "<group>"; };
 		2837E36E1BE8ABB000DD2A7A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		2896811C1BEC8D0D008140A3 /* Wilddog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Wilddog.framework; sourceTree = "<group>"; };
 		28F516A81BE7514D00D4FA21 /* StreamBaseExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StreamBaseExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28F516AB1BE7514D00D4FA21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28F516AD1BE7514D00D4FA21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,14 +134,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				289681221BEC8E63008140A3 /* Wilddog.framework in Frameworks */,
 				2837E36F1BE8ABB000DD2A7A /* libsqlite3.tbd in Frameworks */,
 				2837E30E1BE89B4F00DD2A7A /* CFNetwork.framework in Frameworks */,
+				2896811E1BEC8D19008140A3 /* JavaScriptCore.framework in Frameworks */,
 				2837E30C1BE89B4900DD2A7A /* libc++.tbd in Frameworks */,
 				2837E30A1BE89B4000DD2A7A /* Security.framework in Frameworks */,
 				2837E3081BE89B3B00DD2A7A /* SystemConfiguration.framework in Frameworks */,
-				2837E36D1BE8AB7C00DD2A7A /* Wilddog.framework in Frameworks */,
 				2837E3061BE89B3400DD2A7A /* libicucore.tbd in Frameworks */,
-				28F516DC1BE751A800D4FA21 /* JavaScriptCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,8 +230,8 @@
 		28F5169F1BE7514D00D4FA21 = {
 			isa = PBXGroup;
 			children = (
+				2896811C1BEC8D0D008140A3 /* Wilddog.framework */,
 				2837E36E1BE8ABB000DD2A7A /* libsqlite3.tbd */,
-				2837E36C1BE8AB7C00DD2A7A /* Wilddog.framework */,
 				2837E30D1BE89B4F00DD2A7A /* CFNetwork.framework */,
 				2837E30B1BE89B4900DD2A7A /* libc++.tbd */,
 				2837E3091BE89B4000DD2A7A /* Security.framework */,
@@ -314,7 +301,6 @@
 				28F516A41BE7514D00D4FA21 /* Sources */,
 				28F516A51BE7514D00D4FA21 /* Frameworks */,
 				28F516A61BE7514D00D4FA21 /* Resources */,
-				284DEDE31BE7591000EB148C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -606,8 +592,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StreamBaseExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wildDog.StreamBaseExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Bridging-Header.h";
@@ -622,8 +617,17 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = StreamBaseExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wildDog.StreamBaseExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PRODUCT_NAME)/Bridging-Header.h";

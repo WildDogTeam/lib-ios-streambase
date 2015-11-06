@@ -8,6 +8,8 @@
 
 import Foundation
 
+import Wilddog
+
 class Message : BaseItem {
     var text: String?
     var username: String?
