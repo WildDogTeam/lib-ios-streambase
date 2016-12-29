@@ -1,8 +1,8 @@
 # StreamBaseKit - UI 工具包 for Wilddog
 
-StreamBaseKit 是基于[Wilddog](https://www.wilddog.com)的Swift的UI工具包.  它表面Wilddog查询作为数据流进行实时同步, 递增地去提取, 并且可以被合并或分割成多个部分. 这些数据流可以很容易地插入到UI视图中, 比如UITableView.  
+StreamBaseKit是基于[Wilddog](https://www.wilddog.com)的Swift的UI工具包.  它表明Wilddog查询作为数据流进行实时同步, 递增地去提取, 并且可以被合并或分割成多个部分. 这些数据流可以很容易地插入到UI视图中, 比如UITableView.  
 
-该套件还包括一个 [persistence layer](#persistence-layer), 可以很容易地在Wilddog中持久化对象.
+该套件还包括一个 [persistence layer](# 持久层), 可以很容易地在Wilddog中持久化对象.
 
 
 ## StreamBaseKit 入门:
@@ -52,8 +52,11 @@ class MyViewController : UIViewController {
 
   override func viewDidLoad() {
     // etc...
-
-    let wilddogeRef = Wilddod(url:"https://<YOUR-WILDDOG-APP>.wilddogio.com/")
+    
+    //初始化 WDGApp
+    let options = WDGOptions.init(syncURL: "https://<YOUR-WILDDOG-APP>.wilddogio.com")
+    WDGApp.configureWithOptions(options)
+    let wilddogeRef = WDGSync.sync().reference()
     stream = StreamBase(type: MyItem.self, ref: wilddogRef)
     adapter = StreamTableViewAdapter(tableView: tableView)
     stream.delegate = adapter
@@ -199,7 +202,8 @@ class MyViewController : UIViewController {
 }
 ```
 
-Here we extend the StreamBaseDelegate rather than use the StreamTableViewAdapter because we need to manipulate state in the controller.
+
+这里我们扩展StreamBaseDelegate，而不是使用StreamTableViewAdapter，因为我们需要在控制器中操作状态。
 
 ```swift
 extension MyViewController : StreamBaseDelegate {
@@ -214,9 +218,10 @@ extension MyViewController : StreamBaseDelegate {
 
 ```
 
-#  持久层
+# 持久层
 
-StreamBaseKit还包括持久层: 你的数据, 其中一些被存储, 该层负责其余的.  例如,
+
+StreamBaseKit还包括一个使用声明方法的持久层：你声明存储了什么，并且该层负责处理其余的事情。例如
 
 ```swift
 registry.resource(Group.self, "/group/@")
@@ -249,7 +254,10 @@ class Environment {
 
   static let sharedEnv: Environment = {
     let env = Environment()
-    let wilddog = Wilddog(url: "https://<YOUR-WILDDOG-APP>.wilddogio.com")
+    //初始化 WDGApp
+    let options = WDGOptions.init(syncURL: "https://<YOUR-WILDDOG-APP>.wilddogio.com")
+    WDGApp.configureWithOptions(options)
+    let wilddog = WDGSync.sync().reference()
     env.resourceBase = ResourceBase(wilddog: wilddog)
 
     let registry: ResourceRegistry = env.resourceBase
@@ -318,7 +326,7 @@ registry.counter(Group.self, "message_count", GroupMessage.self)
 
 当messages被创建和销毁时, 该ResourceBase将递增和递减"message_count".  由于groups被注册在“/groups/ @”下, 该计数器会出现在这里：“/groups/ $ group_key / MESSAGE_COUNT”.  
 
-注意，这个计数器被保持在客户端, 因此可以随着时间的推移不一致.  例如, Wilddog [在 app 重启后 transactions 不是持续的](https://z.wilddog.com/ios/guide/8), 因此，如果用户在脱机状态下更改，然后关闭该应用程序，计数器可能不会更新.
+注意，这个计数器被保持在客户端, 因此可以随着时间的推移不一致.  例如, Wilddog 在 app 重启后 transactions 不是持续的, 因此，如果用户在脱机状态下更改，然后关闭该应用程序，计数器可能不会更新.
 
 ##  扩展ResourceBase
 
@@ -330,6 +338,7 @@ ResourceBase具有许多hooks，当使用时可以子类化.  有hooks用于创�
 
 ```
 $ git clone https://github.com/movem3nt/StreamBaseKit.git
+$ pod install
 $ open StreamBaseExample.xcworkspace
 ```
 
@@ -342,3 +351,27 @@ Set the active scheme to StreamBaseExample, and then hit command-R.
 StreamBaseKit脱胎于创建Movem3nt，它是一个复杂的社会应用，并解决各种这样做时遇到的问题。 例如，如果内容被插在上面，那么iOS的表视图将自动滚动，但Wilddog把新的数据添加到末尾。 为了使这些很好地协同工作去创建消息类型的应用程序，需要联合Wilddog和表视图.
 StreamBaseKit也可以很容易地添加更多高级功能，例如拆分集合到表的多个部分，并插入瞬时内容到表像“获取更多的”控制增量提取.
 资源层使得它更要保持你的数据库持久性逻辑和UI视图控制器逻辑分离。 它还提供了便捷的计数器功能.
+
+## 支持
+如果在使用过程中有任何问题，请提 [issue](https://github.com/WildDogTeam/lib-ios-streambase/issues) ，我会在 Github 上给予帮助。
+
+## 相关文档
+
+* [Wilddog 概览](https://docs.wilddog.com/overview/index.html)
+* [IOS SDK快速入门](https://docs.wilddog.com/overview/index.html)
+* [IOS SDK API](https://docs.wilddog.com/api/sync/ios/WDGOptions.html)
+* [下载页面](https://docs.wilddog.com/quickstart/sync/ios.html)
+* [Wilddog FAQ](https://docs.wilddog.com/overview/index.html)
+
+
+## License
+
+[MIT](http://wilddog.mit-license.org/)
+
+## 感谢 Thanks
+
+lib-ios-streambase is built on and with the aid of several projects. We would like to thank the following projects for helping us achieve our goals:
+
+Open Source:
+
+* [StreamBaseKit](https://github.com/burtherman/StreamBaseKit) Firebase StreamBaseKit powered by Firebase

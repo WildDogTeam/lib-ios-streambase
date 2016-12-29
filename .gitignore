@@ -1,0 +1,7 @@
+# Xcode
+
+*.xcuserstate
+.DS_Store
+Pods/
+Podfile.lock
+*.xcworkspace

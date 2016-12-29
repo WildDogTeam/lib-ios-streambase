@@ -18,7 +18,7 @@ import Wilddog
     objects based on specs provided here.
 */
 public class QueryBuilder {
-    var ref: Wilddog
+    var ref: WDGSyncReference
     
     /**
         The maximum number of results to return.  If nil, the whole collection is
@@ -54,7 +54,7 @@ public class QueryBuilder {
 
         :param: ref The Wilddog ref for the collection.
     */
-    public init(ref: Wilddog) {
+    public init(ref: WDGSyncReference) {
         self.ref = ref
     }
 
@@ -98,7 +98,7 @@ public class QueryBuilder {
     }
     
     func buildQueryPager() -> StreamBase.QueryPager {
-        var query: WQuery
+        var query: WDGSyncQuery
         switch ordering {
         case .Key:
             query = ref.queryOrderedByKey()
@@ -132,7 +132,7 @@ public class QueryBuilder {
         }
     }
     
-    func buildQuery() -> WQuery {
+    func buildQuery() -> WDGSyncQuery {
         return buildQueryPager()(start: start, end: end, limit: limit)
     }
 }

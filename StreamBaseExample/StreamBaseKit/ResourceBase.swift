@@ -147,7 +147,7 @@ public class ResourceBase : CustomDebugStringConvertible {
     }
     
     /// The underlying wilddog instance for this base.
-    public let wilddog: Wilddog
+    public let wilddog: WDGSyncReference
     var resources = [ResourceSpec]()
     var counters = [CounterSpec]()
     
@@ -159,7 +159,7 @@ public class ResourceBase : CustomDebugStringConvertible {
 
         :param: wilddog    The underlying Wilddog store.
     */
-    public init(wilddog: Wilddog) {
+    public init(wilddog: WDGSyncReference) {
         self.wilddog = wilddog
     }
     
@@ -287,7 +287,7 @@ public class ResourceBase : CustomDebugStringConvertible {
     
         :returns:   The path part of the ref URL.
     */
-    public class func refToPath(ref: Wilddog) -> String {
+    public class func refToPath(ref: WDGSyncReference) -> String {
         return NSURL(string: ref.description())!.path!
     }
     
@@ -300,7 +300,7 @@ public class ResourceBase : CustomDebugStringConvertible {
         :param: new The new state of the data.  If present, this is a create or update.
         :param: extraContext    The context values that were not used in resolving the path.
     */
-    public func logAction(path: String, old: WDataSnapshot?, new: BaseItemProtocol?, extraContext: ResourceDict) {
+    public func logAction(path: String, old: WDGDataSnapshot?, new: BaseItemProtocol?, extraContext: ResourceDict) {
     }
     
     /**
@@ -316,30 +316,30 @@ public class ResourceBase : CustomDebugStringConvertible {
         return p.componentsSeparatedByString("/")
     }
     
-    func buildRef(path: String, key: String?, context: ResourceContext) -> Wilddog {
+    func buildRef(path: String, key: String?, context: ResourceContext) -> WDGSyncReference {
         var ref = wilddog
         for part in ResourceBase.splitPath(path) {
             if part == "@" {
                 if let k = key {
-                    ref = ref.childByAppendingPath(k)
+                    ref = ref.child(k)
                 } else {
                     ref = ref.childByAutoId()
                 }
             } else if part.hasPrefix("$") {
                 let name = part.prefixTrimmed("$")
                 if let obj = context.get(name) {
-                    ref = ref.childByAppendingPath(obj.key!)
+                    ref = ref.child(obj.key!)
                 } else {
                     fatalError("Cannot find \"\(name)\" for \(path) with context: \(context)")
                 }
             } else {
-                ref = ref.childByAppendingPath(part)
+                ref = ref.child(part)
             }
         }
         return ref
     }
     
-    private func log(ref: Wilddog, old: WDataSnapshot?, new: BaseItemProtocol?, context: ResourceContext, path: String) {
+    private func log(ref: WDGSyncReference, old: WDGDataSnapshot?, new: BaseItemProtocol?, context: ResourceContext, path: String) {
         let path = ResourceBase.refToPath(ref)
         var extra = ResourceDict()
         let skip = Set(ResourceBase.splitPath(path).filter{ $0.hasPrefix("$") }.map{ $0.prefixTrimmed("$") })
@@ -351,14 +351,14 @@ public class ResourceBase : CustomDebugStringConvertible {
         logAction(path, old: old, new: new, extraContext: extra)
     }
     
-    func incrementCounter(ref: Wilddog, by: Int) {
+    func incrementCounter(ref: WDGSyncReference, by: Int) {
         ref.runTransactionBlock({ current in
             var result = max(0, by)
             if let v = current.value as? Int {
                 result = v + by
             }
             current.value = result
-            return WTransactionResult.successWithValue(current)
+            return WDGTransactionResult.successWithValue(current)
         })
     }
     
@@ -401,7 +401,7 @@ public class ResourceBase : CustomDebugStringConvertible {
 
         :returns:   A wilddog ref for this instance in this context.
     */
-    public func ref(instance: BaseItemProtocol, context: ResourceContext) -> Wilddog {
+    public func ref(instance: BaseItemProtocol, context: ResourceContext) -> WDGSyncReference {
         let path = findResourcePath(instance.dynamicType, context: context)
         assert(path != nil, "Cannot find ref for type \(instance.dynamicType)")
         return buildRef(path!, key: instance.key, context: context)
@@ -415,10 +415,10 @@ public class ResourceBase : CustomDebugStringConvertible {
 
         :returns:   A wilddog ref where to find instances of the given type.
     */
-    public func collectionRef(type: BaseItemProtocol.Type, context: ResourceContext) -> Wilddog {
+    public func collectionRef(type: BaseItemProtocol.Type, context: ResourceContext) -> WDGSyncReference {
         let path = findResourcePath(type, context: context)
         assert(path != nil, "Cannot find stream for type \(type)")
-        return buildRef(path!, key: "~", context: context).parent
+        return buildRef(path!, key: "~", context: context).parent!
     }
     
     /**

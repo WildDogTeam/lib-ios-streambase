@@ -85,7 +85,7 @@ public class UnionStream {
             self.error = e
             // Any additional errors are ignored.
         }
-        numStreamsFinished?++
+        numStreamsFinished = numStreamsFinished!+1
         needsUpdate()
     }
     

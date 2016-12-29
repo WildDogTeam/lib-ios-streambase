@@ -22,7 +22,7 @@ import Wilddog
 public class StreamBase : StreamBaseProtocol {
     public typealias Predicate = BaseItem -> Bool
     public typealias Comparator = (BaseItem, BaseItem) -> Bool
-    public typealias QueryPager = (start: AnyObject?, end: AnyObject?, limit: Int?) -> WQuery
+    public typealias QueryPager = (start: AnyObject?, end: AnyObject?, limit: Int?) -> WDGSyncQuery
 
     public enum Ordering {
         case Key
@@ -36,7 +36,7 @@ public class StreamBase : StreamBaseProtocol {
     private var batchArray = KeyedArray<BaseItem>()
     
     private let type: BaseItem.Type!
-    private let query_wd: WQuery!
+    private let query_wd: WDGSyncQuery!
     private let queryPager: QueryPager!
     private let limit: Int?
     
@@ -115,7 +115,7 @@ public class StreamBase : StreamBaseProtocol {
         :param: ascending   Whether to materialize the underlying array in ascending or descending order.
         :param: ordering    The ordering to use.
     */
-    public convenience init(type: BaseItem.Type, ref: Wilddog, limit: Int? = nil, ascending: Bool = true, ordering: Ordering = .Key) {
+    public convenience init(type: BaseItem.Type, ref: WDGSyncReference, limit: Int? = nil, ascending: Bool = true, ordering: Ordering = .Key) {
         let queryBuilder = QueryBuilder(ref: ref)
         queryBuilder.limit = limit
         queryBuilder.ascending = ascending

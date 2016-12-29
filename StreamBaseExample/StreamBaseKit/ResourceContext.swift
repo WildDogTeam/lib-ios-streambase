@@ -76,7 +76,7 @@ public class ResourceContext : CustomDebugStringConvertible {
     */
     public var stack: AnyGenerator<ResourceContext> {
         var current: ResourceContext? = self
-        return anyGenerator {
+        return AnyGenerator {
             let ret = current
             current = current?.parent
             return ret
@@ -143,7 +143,7 @@ public class ResourceContext : CustomDebugStringConvertible {
     
         :returns:   The Wilddog ref.
     */
-    public func ref(instance: BaseItemProtocol) -> Wilddog {
+    public func ref(instance: BaseItemProtocol) -> WDGSyncReference {
         return base.ref(instance, context: self)
     }
     
@@ -154,7 +154,7 @@ public class ResourceContext : CustomDebugStringConvertible {
 
         :returns:   The Wilddog ref.
     */
-    public func collectionRef(type: BaseItemProtocol.Type) -> Wilddog {
+    public func collectionRef(type: BaseItemProtocol.Type) -> WDGSyncReference {
         return base.collectionRef(type, context: self)
     }
     
@@ -221,7 +221,7 @@ extension ResourceContext : SequenceType {
         var current = stack.next()
         var keys = current!.resources.keys
         var seen = Set<String>()
-        return anyGenerator {
+        return AnyGenerator {
             while current != nil {
                 for key in keys where !seen.contains(key) {
                     seen.insert(key)

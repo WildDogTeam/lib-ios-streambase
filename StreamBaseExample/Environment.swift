@@ -14,7 +14,10 @@ class Environment {
     let resourceBase: ResourceBase
     
     static let sharedEnv: Environment = {
-        let wilddog = Wilddog(url: "https://streamexample.wilddogio.com")
+        //初始化 WDGApp
+        let options = WDGOptions.init(syncURL: "https://<YOUR-WILDDOG-APP>.wilddogio.com")
+        WDGApp.configureWithOptions(options)
+        let wilddog = WDGSync.sync().reference()
         
         let resourceBase = ResourceBase(wilddog: wilddog)
         let registry: ResourceRegistry = resourceBase
